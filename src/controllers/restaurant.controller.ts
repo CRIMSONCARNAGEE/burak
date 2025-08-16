@@ -30,4 +30,23 @@ restaurantController.getSignUp = (req: Request, res: Response) => {
   }
 }
 
+restaurantController.processSignUp = (req: Request, res: Response) => {
+  try {
+    console.log('processSignUp');
+    res.send('Done!')
+  }catch (err) {
+    console.log('ERROR processSignUp:', err);
+  }
+}
+
+restaurantController.processLogin = (req: Request, res: Response) => {
+  try {
+    console.log('processLogin');
+    res.send("Done");
+  }catch (err) {
+    console.log('ERROR processLogin:', err);
+  }
+}
+
+
 export default restaurantController;
