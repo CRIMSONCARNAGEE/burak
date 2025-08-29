@@ -15,13 +15,18 @@ export enum Messages {
   SOMETHING_WENT_WRONG = "An unexpected error occurred!",
 
   WRONG_PASSWORD = "Wrong password inserting, please try again!",
-  YOUSING_NICK_PHONE = "You are inserting alredy using nick or phone!",
+  USING_NICK_PHONE = "You are inserting alredy using nick or phone!",
   NO_FOUND_NICK = "No member with that membernick!"
 }
 
 class Errors extends Error {
   public code: HttpCode;
   public message:  Messages;
+
+  static standart = {
+    code: HttpCode.INTERNAL_SERVER_ERROR,
+    message: Messages.SOMETHING_WENT_WRONG
+  }
 
   constructor(statusCode: HttpCode, statusMessage: Messages) {
     super()

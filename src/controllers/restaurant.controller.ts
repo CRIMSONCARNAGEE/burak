@@ -5,6 +5,8 @@ import { LoginInput, MemberInput } from "../libs/types/member";
 import { MemberType } from "../libs/enums/member.enam";
 import { send } from "process";
 
+
+const memberService = new MemberService();
 const restaurantController:T = {}
 restaurantController.goHome = (req: Request, res: Response) => {
   try {
@@ -41,8 +43,8 @@ restaurantController.processSignUp = async (req: Request, res: Response) => {
     const newMember: MemberInput = req.body;
     newMember.MemberType = MemberType.RESTAURANT;
 
-    const memberService = new MemberService();
-    const result = await memberService.processSignUp(newMember)
+    const result = await memberService.signup(newMember)
+    // TODO SESSION authection
 
     res.send(result)
   }catch (err) {
@@ -57,9 +59,8 @@ restaurantController.processLogin = async (req: Request, res: Response) => {
     console.log("body:", req.body );
     const input: LoginInput = req.body;
 
-    const memberService = new MemberService();
     const result = await memberService.processLogin(input);
-
+    // TODO SESSION authection
     res.send(result);
   }catch (err) {
     console.log('ERROR processLogin:', err);

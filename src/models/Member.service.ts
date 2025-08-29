@@ -6,43 +6,38 @@ import * as bcrypt from "bcryptjs"
 import { log } from "node:console";
 
 class MemberService {
+  processLogin(input: LoginInput) {
+    throw new Error("Method not implemented.");
+  }
+  processSignUp(newMember: MemberInput) {
+    throw new Error("Method not implemented.");
+  }
   private readonly memberModel;
 
   constructor() {
     this.memberModel = MemberModule
-  }
-public async processSignUp(input: MemberInput): Promise<Member> {
-  // Nick yoki telefon bo‘yicha tekshirish
-  const exist = await this.memberModel.findOne({
-    $or: [
-      { MemberNick: input.MemberNick },
-      { MemberPhone: input.MemberPhone }
-    ]
-  }).exec();
+    /* SPA */
 
-  if (exist) {
-    throw new Errors(HttpCode.BAD_REQUEST, Messages.CREATE_FAILED);
   }
-
-  // Parolni hash qilish
-  const salt = await bcrypt.genSalt();
+public async signup(input: MemberInput): Promise<Member> {
+    const salt = await bcrypt.genSalt();
   input.MemberPassword = await bcrypt.hash(input.MemberPassword, salt);
 
   try {
     const result = await this.memberModel.create(input);
     // Parolni qaytarib yubormaymiz
     result.MemberPassword = "";
-    return result;
+    return result.toJSON();
   } catch (err:any) {
-    console.log("error", err);
-
-    throw new Errors(HttpCode.BAD_REQUEST, Messages.CREATE_FAILED);
+    console.log("Error model signup:", err);
+    throw new Errors(HttpCode.BAD_REQUEST, Messages.USING_NICK_PHONE);
   }
 }
 
 
 
-  public async processLogin(input: LoginInput): Promise<Member> {
+  public async login(input: LoginInput): Promise<Member> {
+    // TODO: consider member staus later
     const member = await this.memberModel
     .findOne(
       { MemberNick: input.MemberNick },
@@ -57,8 +52,9 @@ public async processSignUp(input: MemberInput): Promise<Member> {
       throw new Errors(HttpCode.UNAUTHORIZED, Messages.WRONG_PASSWORD)
     }
 
-    return await this.memberModel.findById(member._id).exec();
+    return await this.memberModel.findById(member._id).lean().exec();
   }
 }
+ /* SSR */
 
 export default MemberService;
