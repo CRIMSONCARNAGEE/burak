@@ -20,7 +20,12 @@ class MemberService {
 
   }
 public async signup(input: MemberInput): Promise<Member> {
-    const salt = await bcrypt.genSalt();
+  const exist = await this.memberModel
+  .findOne( {MemberType: MemberType.RESTAURANT } )
+  .exec();
+  if (exist) throw new Errors(HttpCode.BAD_REQUEST, Messages.CREATE_FAILED)
+
+  const salt = await bcrypt.genSalt();
   input.MemberPassword = await bcrypt.hash(input.MemberPassword, salt);
 
   try {
@@ -56,5 +61,6 @@ public async signup(input: MemberInput): Promise<Member> {
   }
 }
  /* SSR */
+
 
 export default MemberService;
