@@ -19,7 +19,7 @@ restaurantController.goHome = (req: Request, res: Response) => {
     res.redirect("/admin")
   }
 }
-
+// salom
 restaurantController.getLogin = (req: Request, res: Response) => {
   try {
     console.log('Login page');

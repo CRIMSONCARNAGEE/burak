@@ -17,5 +17,4 @@ routerAdmin
     .get('/check-me', restaurantController.checkAuthSession)
 /* Product */
 /*User */
-
 export default routerAdmin;
