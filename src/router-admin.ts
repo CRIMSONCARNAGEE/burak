@@ -11,6 +11,8 @@ routerAdmin
   .get('/signup', restaurantController.getSignUp)
   .post('/signup', restaurantController.processSignUp);
 
+  routerAdmin
+    .get('/check-me', restaurantController.checkAuthSession)
 /* Product */
 /*User */
 

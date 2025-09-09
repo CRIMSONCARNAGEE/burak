@@ -16,7 +16,8 @@ export enum Messages {
 
   WRONG_PASSWORD = "Wrong password inserting, please try again!",
   USING_NICK_PHONE = "You are inserting alredy using nick or phone!",
-  NO_FOUND_NICK = "No member with that membernick!"
+  NO_FOUND_NICK = "No member with that membernick!",
+  NOT_AUTHENTICATED = "You are not authenticated, plese login first!"
 }
 
 class Errors extends Error {
