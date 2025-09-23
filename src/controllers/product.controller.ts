@@ -22,7 +22,7 @@ productController.getAllProducts = async (req: Request, res: Response) => {
 productController.createNewProducts = async (req: Request, res: Response) => {
   try {
     console.log("getAllProducts");
-
+    res.send('Done')
   }catch (err) {
     console.log('ERROR createNewProducts:', err);
     if(err instanceof Errors) res.status(err.code).json(err);
