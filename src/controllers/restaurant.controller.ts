@@ -1,5 +1,5 @@
 import { T } from "../libs/types/common"
-import express, { Request, Response } from "express";
+import express, { NextFunction, Request, Response } from "express";
 import MemberService from "../models/Member.service"
 import { AdminRequest, LoginInput, MemberInput } from "../libs/types/member";
 import { MemberType } from "../libs/enums/member.enam";
@@ -93,10 +93,10 @@ restaurantController.logout = async (req: AdminRequest, res: Response) => {
     req.session.destroy(function () {
       res.redirect("/admin")
     })
-    }
+  }
   catch (err) {
     console.log('ERROR getLogout:', err);
-      res.redirect("/admin")
+    res.redirect("/admin")
   }
 }
 
@@ -112,4 +112,18 @@ restaurantController.checkAuthSession = async (req: AdminRequest, res: Response)
   }
 }
 
-export default restaurantController;
+restaurantController.verifyRestaurant = (
+  req: AdminRequest,
+  res: Response,
+  next: NextFunction) => {
+
+    if(req.session?.member?.MemberType === MemberType.RESTAURANT) {
+      req.member = req.session.member;
+      next();
+    } else {
+      const message = Messages.NOT_AUTHENTICATED
+      res.send(`<script> alert("${message}; windows.location.replace('/admin/login'); script>`)
+    }
+  }
+
+  export default restaurantController;
