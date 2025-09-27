@@ -14,6 +14,20 @@
 */
 
 /*
-  traditional FD => BSSR => EJS
-  Modern FD => SPA => React
+  Frontend Dev
+      traditional FD => BSSR => EJS
+      Modern FD => SPA => React
+*/
+
+/*
+Cookie:
+    request join
+    self destroy
+*/
+
+/*
+Validations:
+    Frontend validation,
+    Backend validation,
+    Database vlidation
 */

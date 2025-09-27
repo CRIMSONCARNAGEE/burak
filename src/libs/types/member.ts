@@ -1,5 +1,5 @@
 import session from "express-session";
-import { MemberStatus, MemberType } from "../enums/member.enam";
+import { MemberStatus, MemberType } from "../enums/member.enum";
 import { Request } from "express";
 import { Session } from "express-session";
 

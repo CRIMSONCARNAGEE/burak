@@ -1,7 +1,7 @@
 import { LoginInput, MemberInput, Member } from "../libs/types/member";
 import MemberModule from "../schema/Member.module";
 import Errors, { HttpCode, Messages } from "../libs/Errors";
-import { MemberType } from "../libs/enums/member.enam";
+import { MemberType } from "../libs/enums/member.enum";
 import * as bcrypt from "bcryptjs"
 import { log } from "node:console";
 

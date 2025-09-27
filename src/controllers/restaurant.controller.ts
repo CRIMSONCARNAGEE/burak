@@ -2,7 +2,7 @@ import { T } from "../libs/types/common"
 import express, { NextFunction, Request, Response } from "express";
 import MemberService from "../models/Member.service"
 import { AdminRequest, LoginInput, MemberInput } from "../libs/types/member";
-import { MemberType } from "../libs/enums/member.enam";
+import { MemberType } from "../libs/enums/member.enum";
 import { send } from "process";
 import Errors, { Messages } from "../libs/Errors";
 import { log } from "console";
